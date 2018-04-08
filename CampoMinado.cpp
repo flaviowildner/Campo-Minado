@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -13,12 +13,12 @@ char convert(int n) {
 
 void imprimirMatriz(char **matrizView, int &nX, int &nY) {
 	int i, j;
-	system("cls");
+	system("clear");
 	for (i = 0; i < nX; i++) {
 		for (j = 0; j < nY; j++) {
-			printf_s("|%c", matrizView[i][j]);
+			printf("|%c", matrizView[i][j]);
 		}
-		printf_s("|\n");
+		printf("|\n");
 		for (j = 0; j < nY; j++) {
 			printf(" -");
 		}
@@ -56,9 +56,9 @@ void gerarMatriz(int **matrizPrincipal, char **matrizView, int &nX, int &nY, int
 
 	for (i = 0; i < nX; i++) {
 		for (j = 0; j < nY; j++) {
-			printf_s("%d ", matrizPrincipal[i][j]);
+			printf("%d ", matrizPrincipal[i][j]);
 		}
-		printf_s("\n");
+		printf("\n");
 	}
 
 
@@ -105,13 +105,14 @@ int main()
 	//RUN
 
 	while (run == 1) {
-		printf_s("Digite o tamanho do campo em formato 'X Y': ");
-		scanf_s("%d %d", &nX, &nY);
+		system("clear");
+		printf("Digite o tamanho do campo em formato 'X Y': ");
+		scanf("%d %d", &nX, &nY);
 
 		do {
-			system("cls");
-			printf_s("Digite o numero de bombas: ");
-			scanf_s("%d", &nBombas);
+			system("clear");
+			printf("Digite o numero de bombas: ");
+			scanf("%d", &nBombas);
 		} while (nBombas < 0 || nBombas > nX * nY);
 
 		matrizPrincipal = (int **)malloc(nX * sizeof(int*));
@@ -127,7 +128,7 @@ int main()
 		while (runGame == 1) {
 			imprimirMatriz(matrizView, nX, nY);
 			printf("Digite uma posicao: ");
-			scanf_s("%d %d", &posX, &posY);
+			scanf("%d %d", &posX, &posY);
 
 			if (posX >= 1 && posX <= nX && posY >= 1 && posY <= nY) {
 				if (matrizPrincipal[posX - 1][posY - 1] == -1) {
@@ -137,17 +138,17 @@ int main()
 						}
 					}
 					imprimirMatriz(matrizView, nX, nY);
-					printf_s("Voce Perdeu!\nJogar novamente?\n1-Sim\n2-Nao\n");
-					scanf_s("%d", &run);
+					printf("Voce Perdeu!\nJogar novamente?\n1-Sim\n2-Nao\n");
+					scanf("%d", &run);
 					runGame = 2;
 				}
 				else {
 					matrizView[posX - 1][posY - 1] = convert(matrizPrincipal[posX - 1][posY - 1]);
-					printf_s("\n");
+					printf("\n");
 					imprimirMatriz(matrizView, nX, nY);
 					if (verificarVitoria(matrizView, nX, nY, nBombas) == 1) {
 						printf("Voce ganhou!\nJogar novamente?\n1-Sim\n2-Nao\n");
-						scanf_s("%d", &run);
+						scanf("%d", &run);
 						runGame = 2;
 					}
 				}
